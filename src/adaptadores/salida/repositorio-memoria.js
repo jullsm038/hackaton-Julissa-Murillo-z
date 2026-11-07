@@ -12,19 +12,37 @@
  */
 
 export function crearRepositorioMemoria() {
-  // TODO etapa 2: un arreglo con las evaluaciones, y los cuatro métodos del puerto.
+  // Aquí viven las evaluaciones mientras el programa esté encendido.
+  const evaluaciones = [];
+  const copia = (e) => ({ ...e });
+
   return {
     listar() {
-      throw new Error('TODO etapa 2: listar');
+      return evaluaciones.map(copia);
     },
     obtener(id) {
-      throw new Error('TODO etapa 2: obtener');
+      const encontrada = evaluaciones.find((e) => e.id === id);
+      return encontrada ? copia(encontrada) : undefined;
     },
     guardar(evaluacion) {
-      throw new Error('TODO etapa 2: guardar');
+      if (evaluacion.id === undefined || evaluacion.id === null) {
+        // Nueva: id = el mayor que exista + 1 (el primero es 1).
+        const id = evaluaciones.reduce((mayor, e) => Math.max(mayor, e.id), 0) + 1;
+        const nueva = { ...evaluacion, id };
+        evaluaciones.push(nueva);
+        return copia(nueva);
+      }
+      // Ya tiene id: reemplaza la que tenga ese id (o la agrega si no estaba).
+      const posicion = evaluaciones.findIndex((e) => e.id === evaluacion.id);
+      if (posicion === -1) evaluaciones.push(copia(evaluacion));
+      else evaluaciones[posicion] = copia(evaluacion);
+      return copia(evaluacion);
     },
     eliminar(id) {
-      throw new Error('TODO etapa 2: eliminar');
+      const posicion = evaluaciones.findIndex((e) => e.id === id);
+      if (posicion === -1) return false;
+      evaluaciones.splice(posicion, 1);
+      return true;
     },
   };
 }

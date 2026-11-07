@@ -20,19 +20,47 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 export function crearRepositorioArchivo(ruta) {
-  // TODO etapa 2: leer() y escribir(lista) sobre `ruta`, y los cuatro métodos del puerto apoyados en ellos.
+  // Lee la lista del archivo (si todavía no existe, la lista está vacía).
+  function leer() {
+    if (!existsSync(ruta)) return [];
+    return JSON.parse(readFileSync(ruta, 'utf8'));
+  }
+
+  // Escribe la lista completa en el archivo (creando la carpeta si hace falta).
+  function escribir(lista) {
+    mkdirSync(dirname(ruta), { recursive: true });
+    writeFileSync(ruta, JSON.stringify(lista, null, 2));
+  }
+
   return {
     listar() {
-      throw new Error('TODO etapa 2: listar');
+      return leer();
     },
     obtener(id) {
-      throw new Error('TODO etapa 2: obtener');
+      return leer().find((e) => e.id === id);
     },
     guardar(evaluacion) {
-      throw new Error('TODO etapa 2: guardar');
+      const lista = leer();
+      if (evaluacion.id === undefined || evaluacion.id === null) {
+        const id = lista.reduce((mayor, e) => Math.max(mayor, e.id), 0) + 1;
+        const nueva = { ...evaluacion, id };
+        lista.push(nueva);
+        escribir(lista);
+        return { ...nueva };
+      }
+      const posicion = lista.findIndex((e) => e.id === evaluacion.id);
+      if (posicion === -1) lista.push({ ...evaluacion });
+      else lista[posicion] = { ...evaluacion };
+      escribir(lista);
+      return { ...evaluacion };
     },
     eliminar(id) {
-      throw new Error('TODO etapa 2: eliminar');
+      const lista = leer();
+      const posicion = lista.findIndex((e) => e.id === id);
+      if (posicion === -1) return false;
+      lista.splice(posicion, 1);
+      escribir(lista);
+      return true;
     },
   };
 }
