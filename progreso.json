@@ -1,0 +1,54 @@
+{
+  "esquema": 1,
+  "equipo": "Julissa Murillo",
+  "integrantes": [
+    "Julissa Murillo"
+  ],
+  "actualizado": "2026-11-07T03:01:08.221Z",
+  "entorno": {
+    "node": "v22.23.4",
+    "sistema": "linux x64"
+  },
+  "etapas": {
+    "1": {
+      "titulo": "Casos de uso",
+      "puntos": 15,
+      "extra": false,
+      "ok": true,
+      "primeraVez": "2026-11-07T03:01:08.231Z",
+      "ultima": "2026-11-07T03:01:08.231Z",
+      "comprobaciones": "9/9",
+      "evidencia": ""
+    },
+    "2": {
+      "titulo": "Adaptadores de salida",
+      "puntos": 15,
+      "extra": false,
+      "ok": true,
+      "primeraVez": "2026-11-07T03:01:08.245Z",
+      "ultima": "2026-11-07T03:01:08.245Z",
+      "comprobaciones": "15/15",
+      "evidencia": ""
+    },
+    "3": {
+      "titulo": "Adaptador de entrada: la API HTTP",
+      "puntos": 20,
+      "extra": false,
+      "ok": true,
+      "primeraVez": "2026-11-07T03:01:08.358Z",
+      "ultima": "2026-11-07T03:01:08.358Z",
+      "comprobaciones": "12/12",
+      "evidencia": ""
+    },
+    "4": {
+      "titulo": "Composición y regla de dependencias",
+      "puntos": 15,
+      "extra": false,
+      "ok": true,
+      "primeraVez": "2026-11-07T03:01:08.375Z",
+      "ultima": "2026-11-07T03:01:08.375Z",
+      "comprobaciones": "6/6",
+      "evidencia": ""
+    }
+  }
+}
